@@ -8,8 +8,10 @@ class Game
     robot1 = Robot.new('Bender')
     robot2 = Robot.new('Wall-E')
     robot3 = Robot.new('Karen (From SpongeBob, aka Plankton\'s wife)')
+    robot4 = Robot.new('Chopper')
+    robot5 = Robot.new('Juan')
 
-    @robots = [robot1, robot2, robot3]
+    @robots = [robot1, robot2, robot3, robot4, robot5]
     @turn_manager = TurnManager.new(@robots)
   end
 
@@ -24,6 +26,7 @@ class Game
         puts "#{turn.attacker.name} is dead ☠️"
       else
         puts "#{turn.attacker.name} is attacking #{turn.defender.name}!"
+        puts "#{turn.attacker.name} is going berserk!" if turn.attacker.berserk?
         amount = turn.attacker.attack turn.defender
         puts "#{turn.attacker.name} does #{amount} damage!"
       end
@@ -32,7 +35,7 @@ class Game
 
       puts game_summary
 
-      sleep 0.25
+      sleep 0.5
     end
 
     winning_robot = alive_robots[0]

@@ -11,6 +11,7 @@ class Robot
 
   def attack(other_robot)
     damage = rand(@ap) + 1
+    damage *= 2 if berserk?
     other_robot.take_damage(damage)
 
     damage
@@ -27,6 +28,8 @@ class Robot
   def status_summary
     if dead?
       "☠️"
+    elsif berserk?
+      "😤"
     else
       ""
     end
@@ -34,6 +37,10 @@ class Robot
 
   def dead?
     @hp <= 0
+  end
+
+  def berserk?
+    @hp <= 0.2 * MAX_HEALTH
   end
   
 end
