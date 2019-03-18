@@ -23,5 +23,9 @@ class Robot
   def summary
     "#{@name}: #{@hp}HP"
   end
+
+  def dead?
+    @hp <= 0
+  end
   
 end
