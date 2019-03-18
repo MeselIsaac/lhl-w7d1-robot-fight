@@ -1,6 +1,6 @@
 # Robot Fight
 
-Today we'll be moddelling a game which will allow a bunc of robots to fight each other
+Today we'll be modelling a game which will allow a bunch of robots to fight each other
 
 ## Requirements
 
