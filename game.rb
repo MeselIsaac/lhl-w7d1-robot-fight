@@ -23,9 +23,10 @@ class Game
 
       puts "#{attacking_robot.name} is attacking #{defending_robot.name}"
 
-      damage = attacking_robot.attack(defending_robot)
+      attack = attacking_robot.attack(defending_robot)
 
-      puts "#{attacking_robot.name} did #{damage} damage"
+      puts "#{attacking_robot.name} is going berserk 😤" if attack.berserk
+      puts "#{attacking_robot.name} did #{attack.amount} damage"
 
       pad "Summary"
       puts full_summary

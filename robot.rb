@@ -1,3 +1,5 @@
+require_relative 'attack'
+
 class Robot
   attr_reader :name
 
@@ -11,8 +13,10 @@ class Robot
 
   def attack(other_robot)
     damage = rand(@ap) + 1
+    damage *= 2 if berserk?
     other_robot.take_damage(damage)
-    damage
+
+    Attack.new(damage, berserk?)
   end
 
   def take_damage(amount)
@@ -20,10 +24,16 @@ class Robot
   end
 
   def summary
-    "#{@name}: #{@hp}HP"
+    "#{@name}: #{@hp}HP #{berserk? ? "😤" : ""}"
   end
 
   def dead?
     @hp <= 0
+  end
+
+  private
+
+  def berserk?
+    @hp <= MAX_HEALTH * 0.2
   end
 end
