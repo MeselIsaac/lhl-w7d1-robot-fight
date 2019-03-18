@@ -1,4 +1,5 @@
 require_relative 'robot'
+require_relative 'turn_manager'
 
 # Only this class (and main) will be "allowed" to call puts
 class Game
@@ -9,29 +10,25 @@ class Game
     robot3 = Robot.new('Karen (From SpongeBob, aka Plankton\'s wife)')
 
     @robots = [robot1, robot2, robot3]
-    @current_round = 1
-    @current_robot = 0
+    @turn_manager = TurnManager.new(@robots)
   end
 
   # This method will handle the main game loop
   def play
     while (not game_over?)
-      header "Round #{@current_round}"
-      
-      attacker = attacking_robot
-      defender = defending_robot(attacker)
+      turn = @turn_manager.next_turn(alive_robots)
 
-      puts "#{attacker.name} is attacking #{defender.name}!"
+      header "Round #{turn.round_number}"
 
-      amount = attacker.attack defender
+      puts "#{turn.attacker.name} is attacking #{turn.defender.name}!"
 
-      puts "#{attacker.name} does #{amount} damage!"
+      amount = turn.attacker.attack turn.defender
+
+      puts "#{turn.attacker.name} does #{amount} damage!"
 
       header "Summary"
 
       puts game_summary
-
-      next_turn
 
       sleep 0.75
     end
@@ -41,21 +38,12 @@ class Game
   # i.e. they are not available outside of this class
   private
 
-  def attacking_robot
-    @robots[@current_robot]
-  end
-
-  def defending_robot(attacker)
-    @robots.filter {|r| r != attacker }.sample
-  end
-
-  def next_turn
-    @current_round += 1
-    @current_robot = (@current_robot + 1) % @robots.count
+  def alive_robots
+    @robots.filter { |r| not r.dead? }
   end
 
   def game_over?
-    @robots.filter { |r| not r.dead? }.count == 1
+    alive_robots.count == 1
   end
 
   def header(message)
