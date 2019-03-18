@@ -1,4 +1,5 @@
 require_relative 'robot'
+require_relative 'turn_manager'
 
 # Only this class (and main) will be "allowed" to call puts
 class Game
@@ -7,17 +8,18 @@ class Game
     robot1 = Robot.new('HAL 9000')
     robot2 = Robot.new('Wall-E')
     @robots = [robot1, robot2]
-    @current_turn = 1
+    @turn_manager = TurnManager.new(@robots)
   end
 
   # This method will handle the main game loop
   def play
     while (!game_over?)
-      pad "Round #{@current_turn}"
+      turn = @turn_manager.next_turn
 
-      attacking_robot = @robots[0]
+      pad "Round #{turn.round_number}"
 
-      defending_robot = @robots[1]
+      attacking_robot = turn.attacker
+      defending_robot = turn.defender
 
       puts "#{attacking_robot.name} is attacking #{defending_robot.name}"
 
@@ -29,8 +31,6 @@ class Game
       puts full_summary
 
       sleep 1
-
-      next_turn
     end
 
     winning_robot = alive_robots[0]
@@ -42,10 +42,6 @@ class Game
   # methods declared after here will be marked as "private" 
   # i.e. they are not available outside of this class
   private
-
-  def next_turn
-    @current_turn += 1
-  end
 
   def pad(message)
     puts
