@@ -32,6 +32,6 @@ class TurnManager
   end
 
   def get_defender(attacker)
-    @players.filter {|r| r != attacker }.sample
+    @players.filter {|r| r != attacker && (not r.dead?) }.sample
   end
 end

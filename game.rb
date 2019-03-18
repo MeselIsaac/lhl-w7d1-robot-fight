@@ -24,17 +24,21 @@ class Game
       attacking_robot = turn.attacker
       defending_robot = turn.defender
 
-      puts "#{attacking_robot.name} is attacking #{defending_robot.name}"
+      if attacking_robot.dead?
+        puts "#{attacking_robot.name} is dead ☠️"
+      else
+        puts "#{attacking_robot.name} is attacking #{defending_robot.name}"
 
-      attack = attacking_robot.attack(defending_robot)
+        attack = attacking_robot.attack(defending_robot)
 
-      puts "#{attacking_robot.name} is going berserk 😤" if attack.berserk
-      puts "#{attacking_robot.name} did #{attack.amount} damage"
+        puts "#{attacking_robot.name} is going berserk 😤" if attack.berserk
+        puts "#{attacking_robot.name} did #{attack.amount} damage"
+      end
 
       pad "Summary"
       puts full_summary
 
-      sleep 1
+      sleep 0.75
     end
 
     winning_robot = alive_robots[0]
