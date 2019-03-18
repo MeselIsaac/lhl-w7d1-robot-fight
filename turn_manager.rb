@@ -2,7 +2,7 @@ require_relative 'turn'
 
 class TurnManager
   def initialize(players)
-    @players = players.dup
+    @players = players.dup.shuffle
     @current_turn = 1
   end
 
