@@ -20,11 +20,13 @@ class Game
 
       header "Round #{turn.round_number}"
 
-      puts "#{turn.attacker.name} is attacking #{turn.defender.name}!"
-
-      amount = turn.attacker.attack turn.defender
-
-      puts "#{turn.attacker.name} does #{amount} damage!"
+      if (turn.attacker.dead?)
+        puts "#{turn.attacker.name} is dead ☠️"
+      else
+        puts "#{turn.attacker.name} is attacking #{turn.defender.name}!"
+        amount = turn.attacker.attack turn.defender
+        puts "#{turn.attacker.name} does #{amount} damage!"
+      end
 
       header "Summary"
 
