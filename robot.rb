@@ -21,7 +21,15 @@ class Robot
   end
 
   def summary
-    "#{@name}: #{@hp}HP"
+    "#{@name}: #{@hp}HP #{status_summary}"
+  end
+
+  def status_summary
+    if dead?
+      "☠️"
+    else
+      ""
+    end
   end
 
   def dead?
