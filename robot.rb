@@ -24,7 +24,17 @@ class Robot
   end
 
   def summary
-    "#{@name}: #{@hp}HP #{berserk? ? "😤" : ""}"
+    "#{@name}: #{@hp}HP #{summary_status}"
+  end
+
+  def summary_status
+    if dead?
+      "☠️"
+    elsif berserk?
+      "😤"
+    else
+      ""
+    end
   end
 
   def dead?

@@ -7,7 +7,10 @@ class Game
   def initialize
     robot1 = Robot.new('HAL 9000')
     robot2 = Robot.new('Wall-E')
-    @robots = [robot1, robot2]
+    robot3 = Robot.new('Iron Man')
+    robot4 = Robot.new('C3-P0')
+    robot5 = Robot.new('R2-D2')
+    @robots = [robot1, robot2, robot3, robot4, robot5]
     @turn_manager = TurnManager.new(@robots)
   end
 
