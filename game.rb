@@ -30,8 +30,12 @@ class Game
 
       puts game_summary
 
-      sleep 0.75
+      sleep 0.25
     end
+
+    winning_robot = alive_robots[0]
+
+    header "#{winning_robot.name} is winner!"
   end
 
   # methods declared after here will be marked as "private" 
