@@ -1,9 +1,9 @@
-require_relative 'game'
+require './game'
 
 game = Game.new
 
 puts "Welcome to the Robot Fight!"
 
-game.play
+game.run
 
-puts "Thanks for playing!"
+puts "Thanks for playing"
